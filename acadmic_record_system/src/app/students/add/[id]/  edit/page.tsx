@@ -8,6 +8,8 @@ type Student = {
     name: string;
     rollno: string;
     course: string;
+    branch: string;
+    section: string;
 };
 
 export default function EditStudentPage({
@@ -16,6 +18,9 @@ export default function EditStudentPage({
     params: { id: string };
 }) {
     const [student, setStudent] = useState<Student | null>(null);
+    const [branch, setBranch] = useState("");
+    const [section, setSection] = useState("");
+
 
     useEffect(() => {
         async function load() {
@@ -41,6 +46,8 @@ export default function EditStudentPage({
                 name: student.name,
                 rollno: student.rollno,
                 course: student.course,
+                branch: student.branch,
+                section: student.section,
             })
             .eq("id", params.id);
 
@@ -64,6 +71,17 @@ export default function EditStudentPage({
                     value={student.name}
                     className="w-full p-2 border rounded dark:bg-neutral-800"
                     onChange={(e) => setStudent({ ...student, name: e.target.value })}
+                />
+                <input
+                    type="text"
+                    value={student.branch}
+                    onChange={(e) => setStudent({ ...student, branch: e.target.value })}
+                />
+
+                <input
+                    type="text"
+                    value={student.section}
+                    onChange={(e) => setStudent({ ...student, section: e.target.value })}
                 />
 
                 <input
